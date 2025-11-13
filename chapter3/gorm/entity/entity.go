@@ -5,7 +5,7 @@ import "gorm.io/gorm"
 type User struct {
 	Id      int    `gorm:"primary_key"`
 	Name    string `gorm:"size:255"`
-	Posts   []Post `gorm:"foreignkey:UserId"`
+	Posts   []Post `gorm:"foreignKey:UserId"`
 	PostNum int
 }
 
@@ -14,7 +14,7 @@ type Post struct {
 	Title         string    `gorm:"size:255"`
 	Body          string    `gorm:"size:255"`
 	UserId        int       `gorm:"index"`
-	Comments      []Comment `gorm:"foreignkey:PostId"`
+	Comments      []Comment `gorm:"foreignKey:PostId"`
 	CommentStatus string
 }
 
@@ -22,7 +22,6 @@ type Comment struct {
 	Id      int    `gorm:"primary_key"`
 	Content string `gorm:"size:255"`
 	PostId  int    `gorm:"index"`
-	Post    *Post  `gorm:"foreignkey:PostId"`
 }
 
 func (p *Post) AfterCreate(tx *gorm.DB) error {
